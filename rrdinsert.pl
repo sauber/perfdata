@@ -42,7 +42,7 @@ sub rrdcreate {
     my $duration = int 1.04 * $i->[1] / $step / $interval; # 4% bonus
     push @ds, "RRA:AVERAGE:0.5:$interval:$duration";
   }
-  warn "rrdtool create $file @ds\n";
+  #warn "rrdtool create $file @ds\n";
   RRDs::create($file, @ds);
   warn RRDs::error if RRDs::error;
 }
@@ -53,7 +53,7 @@ sub rrdupdate {
 
   my $file = rrdfile $dir, $label;
   my @ds = "N:$value";
-  warn "rrdtool update $file @ds\n";
+  #warn "rrdtool update $file @ds\n";
   RRDs::update($file, @ds);
   warn RRDs::error if RRDs::error;
 }
@@ -61,5 +61,6 @@ sub rrdupdate {
 
 my($dir,$label,$value) = @ARGV;
 die "Usage: $0 dir key value\n" unless $dir and $label and $value;
+die "Usage: $0 dir key value\n" unless $label =~ s/\D+/;
 rrdcreate $dir, $label, $value;
 rrdupdate $dir, $label, $value;
