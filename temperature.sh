@@ -13,6 +13,6 @@ done
 
 # Collect temporature for each harddisk
 for d in 6 8 12 14 ; do
-  echo -n "ad$d:"
-  smartctl -A /dev/ad$d | grep 194 | awk '{print $10}'
+  T=`smartctl -A /dev/ad$d | egrep "^194 " | awk '{print $10}'`
+  echo "ad$d:$T"
 done

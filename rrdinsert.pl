@@ -61,6 +61,6 @@ sub rrdupdate {
 
 my($dir,$label,$value) = @ARGV;
 die "Usage: $0 dir key value\n" unless $dir and $label and $value;
-die "Usage: $0 dir key value\n" unless $label =~ s/\D+/;
+die "Usage: $0 dir key value\n" unless $label =~ /\D+/;
 rrdcreate $dir, $label, $value;
 rrdupdate $dir, $label, $value;
