@@ -1,0 +1,25 @@
+How to get performance data
+
+= Temperature
+
+== CPU
+
+# kldload coretemp
+# sysctl -a | grep temper
+dev.cpu.0.temperature: 47
+dev.cpu.1.temperature: 48
+dev.cpu.2.temperature: 46
+dev.cpu.3.temperature: 46
+
+== Disk
+
+# smartctl -A /dev/ad6 | grep 194
+194 Temperature_Celsius     0x0022   051   054   000    Old_age   Always       -       51 (0 15 0 0)
+# smartctl -A /dev/ad8 | grep 194
+194 Temperature_Celsius     0x0002   125   125   000    Old_age   Always       -       44 (Lifetime Min/Max 23/54)
+# smartctl -A /dev/ad12 | grep 194
+194 Temperature_Celsius     0x0022   101   096   000    Old_age   Always       -       49
+# smartctl -A /dev/ad14 | grep 194
+194 Temperature_Celsius     0x0002   101   101   000    Old_age   Always       -       54 (Lifetime Min/Max 16/60)
+# 
+
